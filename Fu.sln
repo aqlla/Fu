@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fu.Core", "Fu.Core\Fu.Core.csproj", "{06974F1C-E232-4E14-A48B-23362F67D791}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fu.Tests", "Fu.Tests\Fu.Tests.csproj", "{AA7E1A16-3906-499C-988F-FD464B59FF60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fu.Rnd", "Fu.Rnd\Fu.Rnd.csproj", "{66087683-24F9-4544-A13F-B95C2FAD95D8}"
@@ -14,10 +12,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{06974F1C-E232-4E14-A48B-23362F67D791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06974F1C-E232-4E14-A48B-23362F67D791}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06974F1C-E232-4E14-A48B-23362F67D791}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06974F1C-E232-4E14-A48B-23362F67D791}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AA7E1A16-3906-499C-988F-FD464B59FF60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA7E1A16-3906-499C-988F-FD464B59FF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA7E1A16-3906-499C-988F-FD464B59FF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
