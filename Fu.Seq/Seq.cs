@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Fu.Seq.Extensions;
+
 namespace Fu.Seq;
 
 public static class Seq 
@@ -15,7 +17,7 @@ public static class Seq
     
     
     public static IEnumerable<TOut> Repeat<TOut>(int n, Func<TOut> fn) => 
-        Range(n).Select(_ => fn());
+        n.Range().Select(_ => fn());
     
     
     public static IEnumerable<TOut> Select<TOut>(int n, int start, Func<int, TOut> fn) => 
