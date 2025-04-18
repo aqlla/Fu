@@ -73,7 +73,7 @@ public static class MathVec2DExt
         where T : struct, 
             IComparisonOperators<T, T, bool>, 
             IRootFunctions<T>
-        => self.LengthSquared() is T m && m > T.Zero 
+        => self.LengthSquared() is var m && m > T.Zero 
             ? self / T.Sqrt(m) : Vec2<T>.Zero;
     
     
@@ -96,7 +96,7 @@ public static class MathVec2DExt
     
         var from = T.Sqrt(r1);
         var num = T.Lerp(from, T.Sqrt(r2), weight);
-        return self.Rotate(self.AngleTo(to) * weight) * (num / from);
+        return self.Rotate(self.AngleTo(to) * weight) * Math.Div(num, from);
     }
     
     

@@ -1,0 +1,15 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup>
+        <Compile Remove="GlobalUsings.cs" />
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)GlobalUsings.cs" />
+    </ItemGroup>
+    <Target Name="GenerateGlobalUsings" BeforeTargets="CoreCompile">
+        <WriteLinesToFile
+                File="$(IntermediateOutputPath)GlobalUsings.g.cs"
+                Lines='global using static Fu.Math.Math;'
+                Overwrite="true" />
+        <ItemGroup>
+            <Compile Include="$(IntermediateOutputPath)GlobalUsings.g.cs" />
+        </ItemGroup>
+    </Target>
+</Project>

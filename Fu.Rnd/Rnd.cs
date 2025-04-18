@@ -1,7 +1,5 @@
 using System.Numerics;
 
-using Fu.Core.Seq;
-
 namespace Fu.Rnd;
 
 public static partial class Rnd
@@ -30,7 +28,7 @@ public static partial class Rnd
     
     // String
     public static string String(int length, string opts) => 
-        new string(Seq.Repeat(length, Picker(opts)).ToArray());
+        new string(Fu.Seq.Seq.Repeat(length, Picker(opts)).ToArray());
 
     
     public static string String(int length)

@@ -1,4 +1,3 @@
-using  Fu.Core.Seq;
 
 namespace Fu.Rnd;
 
