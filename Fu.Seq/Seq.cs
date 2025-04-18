@@ -1,6 +1,10 @@
-﻿namespace Fu.Seq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public static partial class Seq 
+namespace Fu.Seq;
+
+public static class Seq 
 {
     
     public static IEnumerable<int> Range(int n) => 
@@ -9,16 +13,16 @@ public static partial class Seq
     public static IEnumerable<int> Range(int n, int start) => 
         Enumerable.Range(start, n);
     
-
-    public static IEnumerable<TOut> Repeat<TOut>(int n, Func<TOut> fn) => Range(n).Select(_ => fn());
     
-
+    public static IEnumerable<TOut> Repeat<TOut>(int n, Func<TOut> fn) => 
+        Range(n).Select(_ => fn());
+    
+    
     public static IEnumerable<TOut> Select<TOut>(int n, int start, Func<int, TOut> fn) => 
         Range(n, start).Select(fn);
     
-    
-
 }
+
 
 
 

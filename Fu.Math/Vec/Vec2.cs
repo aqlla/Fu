@@ -52,6 +52,7 @@ public readonly record struct Vec2<T>(T X, T Y) :
 
 public static class MathVec2DExt
 {
+    
     public static T LengthSquared<T>(this Vec2<T> self) 
         where T : struct, INumberBase<T> 
         => self.Dot(self);

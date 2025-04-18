@@ -30,7 +30,7 @@ public interface IStaticMultiplicative<T> : IStaticMultiplicative<T, T, T>;
 
 
 
-public static partial class Math
+public static class Math
 {
  
     public static T Zero<T>() where T : IAdditiveIdentity<T, T> => T.AdditiveIdentity;
@@ -146,3 +146,4 @@ public static partial class Math
     
 
 }
+
