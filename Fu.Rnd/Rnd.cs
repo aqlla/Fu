@@ -1,5 +1,6 @@
 using System.Numerics;
 
+using Fu.Seq;
 using Fu.Seq.Extensions;
 
 namespace Fu.Rnd;
@@ -23,24 +24,22 @@ public static partial class Rnd
         _random.NextDouble() * max;
     
     
-    public static float Float(float min, float max) => (float) Double(min, max);
-    public static float Float(float max) => (float) Double(max);
+    public static float Float(float min, float max) => 
+        (float) Double(min, max);
+    public static float Float(float max) => 
+        (float) Double(max);
     
     
     
     // String
-    public static string String(int length, string opts) => 
-        new string(Seq.Seq.Repeat(length, Picker(opts)).ToArray());
+    public static string String(int n, string chars) => 
+        new string(Generate.Repeat(n, chars.EmitWith(Pick)).ToArray());
 
     
-    public static string String(int length)
-    {
-        const string opts = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
-        return String(length, opts);
-    }
-    
-    
-    
+    public static string String(int n) => 
+        String(n, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_");
+
+
     // ** Incrementors ** // 
     
     public static int Add(int value, int atMost, int atLeast = 0) =>
@@ -85,7 +84,7 @@ public static partial class Rnd
     /// incrementing the value by a random amount within the specified range.
     /// </returns>
     public static Func<int> Ascending(int maxStep, int minStep, int start = 0) =>
-        Seq.Generate.Stateful(start, Adder(atMost: maxStep, atLeast: minStep));
+        Generate.Stateful(start, Adder(atMost: maxStep, atLeast: minStep));
     
 
     
@@ -98,16 +97,7 @@ public static partial class Rnd
     /// <typeparam name="T">The type of elements in the array.</typeparam>
     /// <param name="xs">The array of elements.</param>
     /// <returns>A randomly selected element from the array.</returns>
-    public static T Pick<T>(T[] xs) => xs[Int(xs.Length)];
-
-
-    /// <inheritdoc cref="Pick{T}(T[])"/>
-    public static T Pick<T>(IEnumerable<T> xs) => Pick(xs.ToArray());
-
-
-    public static Func<T> Picker<T>(IEnumerable<T> ts)
-    {
-        var tsArray = ts.ToArray();
-        return () => Pick(tsArray);
-    }
+    public static T Pick<T>(ReadOnlySpan<T> xs) => 
+        xs[Int(xs.Length)];
+    
 }

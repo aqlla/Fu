@@ -8,6 +8,7 @@ public class Class1
     public static void Main()
     {
         var v2i = new Vec2<int>(1, 2);
+        // var v2b = new Vec2<bool>(true, false);
         var v2d = new Vec2<double>(1, 2);
         
         
