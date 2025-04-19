@@ -1,4 +1,3 @@
-using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
@@ -12,24 +11,14 @@ public static class Vec2
     
     public static Vec2<T> Create<T>(T x) 
         where T : struct, INumberBase<T> => new(x, x);
-    
-    
 }
     
 
+
 [StructLayout(LayoutKind.Sequential)]
-public readonly struct Vec2<T>(T x, T y) : IVec2<T>
+public readonly record struct Vec2<T>(T X, T Y) : IVec2<T>
     where T : struct, INumberBase<T>
 {
-    private readonly T[] components = [x, y];
-    
-    public ReadOnlySpan<T> Components => components;
-
-    
-    public T X => components[0];
-    public T Y => components[1];
-    
-    
     public static Vec2<T> Zero => Vec2.Create(T.Zero);
     public static Vec2<T> One => Vec2.Create(T.One);
     
@@ -61,6 +50,7 @@ public readonly struct Vec2<T>(T x, T y) : IVec2<T>
     public static Vec2<T> operator /(Vec2<T> l, T r) => 
         new(l.X / r, l.Y / r);
 }
+
 
 
 public static class MathVec2DExt
@@ -98,24 +88,14 @@ public static class MathVec2DExt
     
     
     
-    public static T Dot<T>(this IVec2<T> self, IVec2<T> other) 
-        where T : struct, INumberBase<T> 
-        => self.X * other.X + self.Y * other.Y;
-
-    
-    public static T LengthSquared<T>(this IVec2<T> self) 
-        where T : struct, INumberBase<T> 
-        => Dot(self, self);
-    
-    
     public static T DistanceSquared<T>(this IVec2<T> self, IVec2<T> other) 
         where T : struct, INumberBase<T> 
-        => LengthSquared(Sub(other, self));
+        => Sub(other, self).LengthSquared();
     
     
     public static T Length<T>(this IVec2<T> self) 
         where T : struct, IRootFunctions<T> 
-        => T.Sqrt(LengthSquared(self));
+        => T.Sqrt(self.LengthSquared());
     
     
     public static T Distance<T>(this IVec2<T> self, IVec2<T> other) 
@@ -130,12 +110,12 @@ public static class MathVec2DExt
     
     public static T AngleTo<T>(this IVec2<T> self, IVec2<T> other)
         where T : struct, IFloatingPointIeee754<T>
-        => T.Atan2(Cross(self, other), Dot(self, other));
+        => T.Atan2(Cross(self, other), self.Dot(other));
     
     
     public static Vec2<T> Normal<T>(this IVec2<T> self) 
         where T : struct, IComparisonOperators<T, T, bool>, IRootFunctions<T>
-        => LengthSquared(self) is var r2 && r2 > T.Zero 
+        => self.LengthSquared() is var r2 && r2 > T.Zero 
             ? Div(self, T.Sqrt(r2)) : Vec2.Create(T.Zero);
     
     
@@ -150,8 +130,8 @@ public static class MathVec2DExt
     public static Vec2<T> Slerp<T>(this IVec2<T> self, IVec2<T> target, T weight)
         where T : struct, IFloatingPointIeee754<T>
     {
-        var r1 = LengthSquared(self);
-        var r2 = LengthSquared(target);
+        var r1 = self.LengthSquared();
+        var r2 = target.LengthSquared();
     
         if (r1 == T.AdditiveIdentity || r2 == T.AdditiveIdentity)
             return Lerp(self, target, weight);

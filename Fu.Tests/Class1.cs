@@ -10,6 +10,11 @@ public class Class1
         var v2i = new Vec2<int>(1, 2);
         // var v2b = new Vec2<bool>(true, false);
         var v2d = new Vec2<double>(1, 2);
+        var v3d = new Vec3<double>(1, 2, 3);
+        var v3f = new Vec3<double>(1, 2, 3);
+
+
+        bool iss = v3d == v3f;
         
         
         var res = v2i.Dot(v2i);
