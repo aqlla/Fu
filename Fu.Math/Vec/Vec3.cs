@@ -20,7 +20,8 @@ public static class Vec3
 public readonly record struct Vec3<T>(T X, T Y, T Z) : IVec3<T>
     where T : struct, INumberBase<T>
 {
-    public static Vec3<T> Zero => Vec3.Create(T.Zero);
+    public static Vec3<T> Zero => default;
+    
     public static Vec3<T> One => Vec3.Create(T.One);
     
     

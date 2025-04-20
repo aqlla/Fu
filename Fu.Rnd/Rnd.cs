@@ -13,27 +13,38 @@ public static partial class Rnd
     // ** Random Values ** //
     
     // int
-    public static int Int(int min, int max) => _random.Next(min, max);
+    public static int Int(int min, int max) =>
+        _random.Next(min, max);
     
     public static int Int(int max) => _random.Next(max);
+
+    public static int Int() => _random.Next();
     
     
     public static double Double(double min, double max) => 
         _random.NextDouble() * (max - min) + min;
+
     public static double Double(double max) => 
         _random.NextDouble() * max;
+
+    public static double Double() =>
+        _random.NextDouble();
     
     
     public static float Float(float min, float max) => 
         (float) Double(min, max);
+
     public static float Float(float max) => 
         (float) Double(max);
+
+    public static float Float() =>
+        (float) Double();
     
     
     
     // String
     public static string String(int n, string chars) => 
-        new string(Generate.Repeat(n, chars.EmitWith(Pick)).ToArray());
+        new (Generate.Repeat(n, chars.EmitWith(Pick)).ToArray());
 
     
     public static string String(int n) => 

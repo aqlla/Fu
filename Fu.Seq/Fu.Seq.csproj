@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-<!--        <ImplicitUsings>enable</ImplicitUsings>-->
-<!--        <LangVersion>14</LangVersion>-->
+        <Title>Fun Sequence Utils</Title>
+        <Version>1.0.0</Version>
+        <Description>Functional Utilities - Sequence libs</Description>
         <Nullable>enable</Nullable>
         <TargetFramework>net9.0</TargetFramework>
     </PropertyGroup>

@@ -1,4 +1,5 @@
-﻿using Fu.Math.Vec;
+﻿using System.Numerics;
+using Fu.Math.Vec;
 
 namespace Fu.Tests;
 
@@ -14,7 +15,9 @@ public class Class1
         var v3f = new Vec3<double>(1, 2, 3);
 
 
-        bool iss = v3d == v3f;
+        var nv = Vector3.Zero;
+
+        var iss = v3d == v3f;
         
         
         var res = v2i.Dot(v2i);
