@@ -3,7 +3,7 @@
     <PropertyGroup>
 
         <Title>Fun Random Utils</Title>
-        <Version>1.1.1</Version>
+        <Version>1.1.2</Version>
         <Description>Functional Utilities - Random libs</Description>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>

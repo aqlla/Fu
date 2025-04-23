@@ -5,6 +5,15 @@ namespace Fu.Math;
 
 public static class Math
 {
+    public const double Pi = 3.141592653589793115997963468544185161590576171875;
+    public const double TwoPi = 2 * 3.141592653589793115997963468544185161590576171875;
+    public const double Fib = 1.618033988749895;
+    public const double Epsilon = 4.94065645841247E-324;
+
+
+    public const float Pif = (float) Pi;
+    public const float TwoPif = (float) TwoPi;
+    public const float EpsilonF = 1.401298E-45f;
 
     public static class Const<T>
         where T: ISignedNumber<T>, IMinMaxValue<T>
@@ -26,10 +35,12 @@ public static class Math
         public static T NegativeInfinity => T.NegativeInfinity;
         public static T NaN => T.NaN;
     
+        // ReSharper disable once MemberHidesStaticFromOuterClass
         public static T Epsilon => T.Epsilon;
         public static T E => T.E;
         public static T Tau => T.Tau;
 
+        // ReSharper disable once MemberHidesStaticFromOuterClass
         public static T Pi => T.Pi;
         public static T TwoPi => T.Pi + T.Pi;
         public static T NegativeZero => T.NegativeZero;
@@ -40,7 +51,12 @@ public static class Math
     
     // Signs
     public static T Abs<T>(T value) where T : INumber<T> => T.Abs(value); 
-    public static int Sign<T>(T value) where T : INumber<T> => T.Sign(value);
+    public static int Sign<T>(T value) where T : INumberBase<T> =>
+        value switch {
+            T when T.IsNegative(value) => -1,
+            T when T.IsPositive(value) => 1,
+            _ => 0,
+        };
     public static T Negate<T>(T value) where T: IUnaryNegationOperators<T, T> => -value;
 
     
@@ -181,7 +197,53 @@ public static class Math
     // Interpolation 
     public static T Lerp<T>(T from, T to, T weight) where T : IFloatingPointIeee754<T> 
         => T.Lerp(from, to, weight);
-    
-
 }
 
+public static class Cartesian
+{
+    public static (T x, T y) FromPolar<T>(T theta, T r)
+        where T : struct, IFloatingPointIeee754<T>
+    {
+        var (sin, cos) = Math.SinCos(theta);
+        return (
+            x: r * cos,
+            y: r * sin
+        );
+    }
+
+
+    // 𝑥 = 𝑟 * sin 𝜃 * cos 𝜑
+    // y = 𝑟 * sin 𝜃 * sin 𝜑
+    // z = 𝑟 * cos 𝜃
+    public static (T x, T y, T z) FromSpherical<T>(T phi, T theta)
+        where T : struct, IFloatingPointIeee754<T>
+    {
+        var (tSin, tCos) = Math.SinCos(theta);
+        var (pSin, pCos) = Math.SinCos(phi);
+
+        return (
+            x: pSin * tCos,
+            y: pSin * tSin,
+            z: pCos
+        );
+    }
+
+
+    public static (T x, T y, T z) FromSpherical<T>(T phi, T theta, T r)
+        where T : struct, IFloatingPointIeee754<T>
+    {
+        var (x, y, z) = FromSpherical(phi, theta);
+        return (x * r, y * r, z * r);
+    }
+
+
+    // 𝑥 = 𝑟 cos 𝜃
+    // y = 𝑟 sin 𝜃
+    // z = 𝑧
+    public static (T x, T y, T z) FromCylindrical<T>(T theta, T r, T z)
+        where T : struct, IFloatingPointIeee754<T>
+    {
+        var (x, y) = FromPolar(theta, r);
+        return (x, y, z);
+    }
+}

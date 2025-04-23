@@ -11,7 +11,9 @@ public static partial class Rnd
     
     
     // ** Random Values ** //
-    
+
+    public static bool Bool() => _random.Next(2) == 1;
+
     // int
     public static int Int(int min, int max) =>
         _random.Next(min, max);
