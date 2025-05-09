@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "runtimeOptions": {
+      "tfm": "net9.0",
+      "rollForward": "LatestMinor"
+    }
+  }
+}

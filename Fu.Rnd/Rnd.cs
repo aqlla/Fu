@@ -14,6 +14,8 @@ public static partial class Rnd
 
     public static bool Bool() => _random.Next(2) == 1;
 
+    public static int Sign() => Bool()? 1 : -1;
+
     // int
     public static int Int(int min, int max) =>
         _random.Next(min, max);
@@ -46,7 +48,7 @@ public static partial class Rnd
     
     // String
     public static string String(int n, string chars) => 
-        new (Generate.Repeat(n, chars.EmitWith(Pick)).ToArray());
+        new (Seq.Seq.Repeat(n, chars.EmitWith(Pick)).ToArray());
 
     
     public static string String(int n) => 

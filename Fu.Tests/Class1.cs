@@ -1,32 +1,37 @@
 ﻿using System.Numerics;
 using Fu.Math.Vec;
+using Fu.Seq;
+using Fu.Seq.Extensions;
 
 namespace Fu.Tests;
 
-public class Class1
+public sealed class Class1
 {
 
     public static void Main()
     {
-        var v2i = new Vec2<int>(1, 2);
-        // var v2b = new Vec2<bool>(true, false);
-        var v2d = new Vec2<double>(1, 2);
-        var v3d = new Vec3<double>(1, 2, 3);
-        var v3f = new Vec3<double>(1, 2, 3);
+        var v1 = new Vec3<int>(1, 1, 2);
+        var v2 = new Vec3<int>(3, 4, 8);
+        var v3 = new Vec3<int>(9, 1, 2);
 
+        var res = Seq.Seq.Of(v1, v2, v3).Sum();
 
-        var nv = Vector3.Zero;
-
-        var iss = v3d == v3f;
-        
-        
-        var res = v2i.Dot(v2i);
-
-        var resd = v2d.Dot(v2d);
-        var norm = v2d.Normal();
-        var lerp = v2d.Lerp(v2d, 0.5);
-        
-        Console.WriteLine(v2i);
+        Console.WriteLine(res);
     }
-    
+
+
+    public static string CommaJoin<T>(IEnumerable<T> items) =>
+        string.Join(",", items);
+
+    public static void PrintCmp<T1, T2>(IEnumerable<T1[]> xss, IEnumerable<T2[]> yss) {
+        var i = 0;
+        foreach (var xy in xss.Zip(yss)) {
+            var x = CommaJoin(xy.First);
+            var y = CommaJoin(xy.Second);
+            Console.WriteLine($"Index: {i++}");
+            Console.WriteLine($"  [{CommaJoin(x)}]");
+            Console.WriteLine($"  [{CommaJoin(y)}]");
+            Console.WriteLine();
+        }
+    }
 }

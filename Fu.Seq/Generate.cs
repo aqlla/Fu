@@ -9,24 +9,6 @@ namespace Fu.Seq;
 
 public static class Generate
 {
-
-    public static IEnumerable<int> Range()
-    {
-        int counter = 0;
-        while (true) yield return counter++;
-    }
-    
-    public static IEnumerable<int> Range(int n, int start = 0) 
-    {
-        while (n-- > 0) yield return start++;
-    }
-    
-    public static IEnumerable<TOut> Repeat<TOut>(int n, Func<TOut> fn)
-    {
-        while (n-- > 0) yield return fn();
-    }
-    
-
     public static Func<T> From<T>(IEnumerable<T> ts, Func<ReadOnlySpan<T>, T> selector)
     {
         var tsArray = ts.ToArray();

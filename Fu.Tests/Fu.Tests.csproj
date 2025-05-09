@@ -2,14 +2,20 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <LangVersion>12</LangVersion>
+        <LangVersion>13</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Fu.Math\Fu.Math.csproj" />
       <ProjectReference Include="..\Fu.Rnd\Fu.Rnd.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+      <PackageReference Include="BenchmarkDotNet.Annotations" Version="0.14.0" />
     </ItemGroup>
 
 </Project>
